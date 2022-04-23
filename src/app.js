@@ -8,9 +8,9 @@ const swagger = require('swagger-ui-express');
 const swaggerJs = require('swagger-jsdoc');
 const swaggerSpec = require('./helpers/swaggerJs');
 
-
-//sertting
+//settings
 app.set('port', process.env.PORT || 3000);
+
 //Middlwares
 app.use(express.json());
 app.use(cors());

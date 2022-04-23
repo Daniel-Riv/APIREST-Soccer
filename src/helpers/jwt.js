@@ -10,14 +10,10 @@ const genereteToken = (id_user, name, lastName, email) => {
             (error, token) => {
                 if (error) {
                     rejects(`the token was not generated: ${error}`)
-
                 }
                 resolve(token);
-
             })
     });
-
-
 }
 
 module.exports = {
