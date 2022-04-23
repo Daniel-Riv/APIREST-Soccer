@@ -1,4 +1,5 @@
 const path = require('path');
+
 const swaggerSpec = {
     definition: {
         openapi: '3.0.0',
