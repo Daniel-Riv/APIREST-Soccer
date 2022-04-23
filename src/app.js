@@ -1,6 +1,7 @@
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
+
 const app = express();
 
 //swagger doc
@@ -23,4 +24,4 @@ app.use('/api/soccer/player', require('./routes/player'));
 
 app.listen(app.get('port'), () => {
     console.log('server on port', app.get('port'));
-});
+});  
