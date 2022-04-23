@@ -25,3 +25,5 @@
 <h2>Documentation</h2>
 
 - [Documentation SOCCER APIREST](https://apirestsoccer.herokuapp.com/api/soccer/)
+
+## Daniel Rivas
