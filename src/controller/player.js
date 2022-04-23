@@ -1,7 +1,6 @@
 const dbconnection = require('../database/database');
 const redis = require('../helpers/redisCache');
 
-
 const createPlayer = async (req, res) => {
     const { id, name, age, team_id, squad_number, position, nationality } = req.body;
     const validatorTeam = `select * from team where team_id =${team_id}`;
@@ -31,7 +30,6 @@ const createPlayer = async (req, res) => {
                 message: 'Player created in the database',
                 result
             });
-
         });
     });
 }
@@ -47,7 +45,6 @@ const getplayer = async (req, res) => {
                 });
             }
             redis.set('player', JSON.stringify(results));
-
         });
         if (err) {
             return res.status(500).json({
@@ -60,12 +57,10 @@ const getplayer = async (req, res) => {
                 success: true,
                 results: JSON.parse(resul)
             });
-
         }
     });
-
-
 }
+
 const update = async (req, res) => {
     const { id } = req.params;
     const { name, age, team_id, squad_number, position, nationality } = req.body;
@@ -84,8 +79,6 @@ const update = async (req, res) => {
                     message: `does not appear in the database`
                 });
             }
-
-
         }
         const query = `update player set name ='${name || result[0].name}',age =${age || result[0].age},team_id =${team_id || result[0].team_id},squad_number =${squad_number || result[0].squad_number},position ='${position || result[0].position}',nationality ='${nationality || result[0].nationality}' where id ='${id}'`;
         console.log(query);
@@ -95,19 +88,16 @@ const update = async (req, res) => {
                     success: false,
                     message: `Error ${err}`
                 });
-
             }
             return res.status(200).json({
                 success: true,
                 message: 'player update in database'
             });
-
         });
         console.log(result);
-
     });
-
 }
+
 const detelePlayer = async (req, res) => {
     const { id } = req.params;
     const findByDelete = `select * from player where id = ${id}`;
@@ -125,8 +115,6 @@ const detelePlayer = async (req, res) => {
                     message: `does not appear in the database`
                 });
             }
-
-
         }
         const query = `delete from player where id = ${id}`;
         await dbconnection.query(query, async (err, result) => {
@@ -135,21 +123,16 @@ const detelePlayer = async (req, res) => {
                     success: false,
                     message: `Error ${err}`
                 });
-
             }
             return res.status(200).json({
                 success: true,
                 message: 'delete player in database'
             });
-
         });
-
-    })
-
+    });
 }
 const findFilterTeam = async (req, res) => {
     const { team } = req.query;
-
     if (team) {
         const filterTeam = `select * from team inner join player on player.team_id = team.team_id where player.team_id=${team}`;
         await dbconnection.query(filterTeam, async (err, result) => {
@@ -198,11 +181,8 @@ const findFilterPosition = async (req, res) => {
                 success: true,
                 result
             });
-
         });
     }
-
-
 }
 const findFilterCountry = async (req, res) => {
     const { country } = req.query;
@@ -227,9 +207,7 @@ const findFilterCountry = async (req, res) => {
                 success: true,
                 result
             });
-
         });
-
     }
 }
 

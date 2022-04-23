@@ -1,8 +1,6 @@
 const { genereteToken } = require('../helpers/jwt');
 const dbconnection = require('../database/database');
 
-
-
 const signIn = async (req, res) => {
     const { email, password } = req.body;
     const sentences = ` select * from auth where email = '${email}' AND password = '${password}'`;
@@ -12,7 +10,6 @@ const signIn = async (req, res) => {
                 success: false,
                 message: `Error ${err}`
             });
-
         }
         if (result.length === 0) {
             return res.status(400).json({
@@ -31,6 +28,7 @@ const signIn = async (req, res) => {
 
 
 }
+
 const signUp = async (req, res) => {
     const { id_user, name, lastName, email, password } = req.body;
     console.log(email);
@@ -46,10 +44,8 @@ const signUp = async (req, res) => {
                 success: false,
                 message: 'The user already appears in the database'
             });
-
         }
         const query = `insert into auth(name,lastName,email,password) values ("${name}","${lastName}","${email}","${password}") `;
-
         await dbconnection.query(query, async (err, result) => {
             if (err) {
                 return res.status(500).json({
@@ -60,17 +56,12 @@ const signUp = async (req, res) => {
             return res.status(200).json({
                 success: true,
                 message: 'user create in database'
-            })
-        })
-
-    })
-
+            });
+        });
+    });
 }
-
-
 
 module.exports = {
     signIn,
-    signUp,
-
+    signUp
 }
